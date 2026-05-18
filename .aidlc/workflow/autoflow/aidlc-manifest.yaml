@@ -1,0 +1,117 @@
+version: "2.1"
+feature: "autoflow"
+language: "th"
+platform: "kiro"
+created: "2025-01-20T10:00:00Z"
+updated: "2025-01-20T10:10:00Z"
+state:
+  status: "active"
+  sharedPhases: [context, requirements, decomposition, foundation]
+  mode: "incremental"
+  foundationSkipped: false
+artifacts:
+  context:
+    status: "approved"
+    timestamp: "2025-01-20T10:00:00Z"
+    files: [context.md]
+  requirements:
+    status: "approved"
+    timestamp: "2025-01-20T10:10:00Z"
+    files: [requirements.md, personas.md]
+context-summary:
+  type: "Greenfield"
+  stack: "TypeScript / Angular + NestJS / PostgreSQL"
+  architecture: "Modular Monolith — Transaction Log Engine"
+  feature: "Inventory, AP/AR & Document Flow system with Moving Average costing, multi-path Job Order processing, and accounting export via Mapping Table"
+  impact: "New standalone"
+  complexity: "High"
+  recommendations: { personas: true, units: true, nfr: true }
+decisions:
+  requirements:
+    scope: "MVP — Core TX Engine + Sales + Purchasing + Inventory"
+    personas: "Yes — all 6 roles"
+    jo-flow: "Both Path A and Path B"
+    cn-types: "All 5 CN types"
+    adjustments: "Count + Transfer + Write-off only"
+    ap-ar-matching: "Manual matching"
+    approval: "Simple status-based"
+    mapping-table: "Deferred"
+    alerts: "ERROR only"
+    multi-company: "Single company first"
+    dev-notes: "Use spec recommendations (ar_clearing in TX, Direct write-down, In-app, Batch, No multi-currency, Cycle Count)"
+    priority: "Inventory accuracy (Stock + MA) — foundation for everything"
+  decomposition:
+    strategy: "Domain-Driven"
+    units: "4 — ข้อมูลหลัก, ข้อมูลพื้นฐาน, คลังสินค้า, รายงาน"
+    teams: "4 teams, 1 unit per team"
+    mode: "incremental with foundation"
+  foundation:
+    repo: "Monorepo with Nx"
+    auth: "JWT with RBAC (6 roles)"
+    errors: "NestJS HttpException + DomainException"
+    comms: "Direct module imports"
+    database: "Single DB, separate schemas per unit"
+    shared-types: "Shared library (libs/shared-types/)"
+    orm: "Prisma"
+    api: "REST with OpenAPI/Swagger"
+    testing: "Jest + Supertest + Playwright"
+    infra-units: "Single Foundation unit"
+    frontend: "Single Angular app, lazy-loaded feature modules"
+steering:
+  updatedBy:
+    product: [context, requirements]
+    tech: [context, foundation]
+    structure: [context, foundation]
+units:
+  - name: "master-data"
+    displayName: "ข้อมูลหลัก (Master Data & Core Engine)"
+    status: "not-started"
+    phase: null
+    completedPhases: []
+    implementationMode: null
+    implementation:
+      totalTasks: 0
+      completedTasks: 0
+      currentTask: null
+      currentWave: null
+    artifacts: {}
+    decisions: {}
+  - name: "transactions"
+    displayName: "ข้อมูลพื้นฐาน (Transaction Operations)"
+    status: "not-started"
+    phase: null
+    completedPhases: []
+    implementationMode: null
+    implementation:
+      totalTasks: 0
+      completedTasks: 0
+      currentTask: null
+      currentWave: null
+    artifacts: {}
+    decisions: {}
+  - name: "warehouse"
+    displayName: "คลังสินค้า (Warehouse Operations)"
+    status: "not-started"
+    phase: null
+    completedPhases: []
+    implementationMode: null
+    implementation:
+      totalTasks: 0
+      completedTasks: 0
+      currentTask: null
+      currentWave: null
+    artifacts: {}
+    decisions: {}
+  - name: "reports"
+    displayName: "รายงาน (Reports & Error Alerts)"
+    status: "not-started"
+    phase: null
+    completedPhases: []
+    implementationMode: null
+    implementation:
+      totalTasks: 0
+      completedTasks: 0
+      currentTask: null
+      currentWave: null
+    artifacts: {}
+    decisions: {}
